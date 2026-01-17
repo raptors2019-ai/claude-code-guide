@@ -1,9 +1,86 @@
 'use client';
 
-import { Terminal, Gotcha } from '../ui';
-import { History, Trash2, Download, Eye, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { Terminal, Gotcha, CodeBlock } from '../ui';
+import { History, Trash2, Download, Eye, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+
+const primeMarkdown = `# Prime: Load Project Context
+
+## Objective
+
+Build comprehensive understanding of the codebase by analyzing structure, documentation, and key files.
+
+## Process
+
+### 1. Analyze Project Structure
+
+List all tracked files:
+\`\`\`bash
+git ls-files
+\`\`\`
+
+Show directory structure:
+\`\`\`bash
+tree -L 3 -I 'node_modules|__pycache__|.git|dist|build'
+\`\`\`
+
+### 2. Read Core Documentation
+
+- Read .agents/PRD.md
+- Read CLAUDE.md or similar global rules file
+- Read README files at project root and major directories
+- Read any architecture documentation
+
+### 3. Identify Key Files
+
+Based on the structure, identify and read:
+
+- Main entry points (main.py, index.ts, app.py, etc.)
+- Core configuration files (pyproject.toml, package.json, tsconfig.json)
+- Key model/schema definitions
+- Important service or controller files
+
+### 4. Understand Current State
+
+Check recent activity:
+\`\`\`bash
+git log --oneline -10
+\`\`\`
+
+Check current branch and status:
+\`\`\`bash
+git status
+\`\`\`
+
+## Output Report
+
+Provide a concise summary covering:
+
+### Project Overview
+- Purpose and type of application
+- Primary technologies and frameworks
+- Current version/state
+
+### Architecture
+- Overall structure and organization
+- Key architectural patterns identified
+- Important directories and their purposes
+
+### Tech Stack
+- Languages and versions
+- Frameworks and major libraries
+- Build tools and package managers
+
+### Current State
+- Active branch
+- Recent changes or development focus
+- Any immediate observations
+
+**Make this summary easy to scan - use bullet points and clear headers.**`;
 
 export function Slide5PowerUser() {
+  const [showPrimeContent, setShowPrimeContent] = useState(false);
+
   return (
     <div className="space-y-5 animate-fade-in">
       {/* Title */}
@@ -13,24 +90,6 @@ export function Slide5PowerUser() {
         </h1>
         <p className="text-lg text-[var(--muted)]">
           Context management and session workflow
-        </p>
-      </div>
-
-      {/* Prime command - featured */}
-      <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--accent)]/30 space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
-            <Sparkles className="w-5 h-5 text-[var(--accent)]" />
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold">The /prime Command</h3>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)]">Essential</span>
-          </div>
-        </div>
-        <Terminal command="/prime" />
-        <p className="text-sm text-[var(--muted)]">
-          This primes Claude with deep understanding of your codebase. I run this at the start of most sessions -
-          it reads key files, understands your architecture, and makes Claude significantly more helpful.
         </p>
       </div>
 
@@ -90,6 +149,41 @@ export function Slide5PowerUser() {
         <strong>My workflow:</strong> Start with <code>/prime</code>, work until context gets heavy
         (check with <code>/context</code>), export anything important, then <code>/clear</code> and re-prime.
       </Gotcha>
+
+      {/* Prime Section - Expandable at bottom */}
+      <div className="space-y-3">
+        <button
+          onClick={() => setShowPrimeContent(!showPrimeContent)}
+          className="w-full flex items-center justify-between p-4 rounded-xl bg-[var(--surface)] border border-[var(--accent)]/30 hover:bg-[var(--surface-hover)] transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
+              <Sparkles className="w-5 h-5 text-[var(--accent)]" />
+            </div>
+            <div className="text-left">
+              <h3 className="font-semibold">/prime - Project Context Loader</h3>
+              <p className="text-sm text-[var(--muted)]">
+                Start every session with full codebase understanding. Click to view the skill.
+              </p>
+            </div>
+          </div>
+          {showPrimeContent ? (
+            <ChevronUp className="w-5 h-5 text-[var(--muted)]" />
+          ) : (
+            <ChevronDown className="w-5 h-5 text-[var(--muted)]" />
+          )}
+        </button>
+
+        {showPrimeContent && (
+          <div className="animate-fade-in">
+            <CodeBlock
+              code={primeMarkdown}
+              language="markdown"
+              filename=".claude/skills/prime/SKILL.md"
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
