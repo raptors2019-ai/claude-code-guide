@@ -1,12 +1,16 @@
 export { Slide1Welcome } from './Slide1Welcome';
+export { Slide2GettingStarted } from './Slide2GettingStarted';
 export { Slide2Workflow } from './Slide2Workflow';
 export { Slide3SpecMd } from './Slide3SpecMd';
 export { Slide4PlanMode } from './Slide4PlanMode';
 export { Slide5PowerUser } from './Slide5PowerUser';
 export { Slide6Skills } from './Slide6Skills';
+export { SlideImages } from './SlideImages';
 export { Slide7Walkthrough } from './Slide7Walkthrough';
 export { Slide8Shortcuts } from './Slide8Shortcuts';
 export { Slide9Commands } from './Slide9Commands';
 export { Slide10Prompts } from './Slide10Prompts';
 export { Slide11ClaudeMd } from './Slide11ClaudeMd';
 export { Slide12MCP } from './Slide12MCP';
+export { SlideGit } from './SlideGit';
+export { SlideErrors } from './SlideErrors';

@@ -148,9 +148,9 @@ export function Slide6Skills() {
       <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/20 rounded-xl p-4">
         <p className="text-sm">
           <span className="font-semibold text-[var(--accent)]">Stop typing the same prompts over and over.</span>{' '}
-          Skills let you define instructions once and have them trigger automatically based on keywords and context.
-          Ask for a &quot;code review&quot; and your review skill activates. Mention &quot;commit&quot; and your
-          commit message skill kicks in. No manual invocation - Claude just knows when to use them.
+          Skills are reusable instructions that trigger automatically when you mention certain keywords.
+          Say &quot;code review&quot; and your review skill runs—it&apos;ll even activate if you just mention
+          related keywords in conversation.
         </p>
       </div>
 
