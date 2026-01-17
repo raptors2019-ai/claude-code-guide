@@ -79,8 +79,8 @@ export function Slide2Workflow() {
           </p>
           <ul className="text-sm text-[var(--muted)] space-y-2">
             <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />Claude writes the code</li>
-            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />You review changes</li>
-            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />Commit and deploy</li>
+            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />Test on localhost</li>
+            <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[var(--success)]" />Review and ship</li>
           </ul>
         </div>
       </div>
@@ -107,10 +107,8 @@ export function Slide2Workflow() {
               Skip for:
             </h4>
             <ul className="text-sm text-[var(--muted)] space-y-2 pl-4">
-              <li>Quick one-line fixes</li>
-              <li>Simple typo corrections</li>
-              <li>Questions about existing code</li>
-              <li>Running single commands</li>
+              <li>Simple fixes (typos, one-liners, quick edits)</li>
+              <li>Questions or running single commands</li>
             </ul>
           </div>
         </div>

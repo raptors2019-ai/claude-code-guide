@@ -1,96 +1,94 @@
 'use client';
 
 import { Terminal, Gotcha } from '../ui';
-import { Zap, History, Trash2, Download } from 'lucide-react';
+import { History, Trash2, Download, Eye, Sparkles } from 'lucide-react';
 
 export function Slide5PowerUser() {
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-5 animate-fade-in">
       {/* Title */}
       <div className="space-y-2">
         <h1 className="text-4xl font-bold tracking-tight">
           <span className="text-[var(--accent)]">Power User</span> Features
         </h1>
         <p className="text-lg text-[var(--muted)]">
-          Skip permissions, resume sessions, and more
+          Context management and session workflow
         </p>
       </div>
 
-      {/* Main features grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Skip Permissions */}
-        <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--surface-light)] space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[var(--warning)]/10 flex items-center justify-center">
-              <Zap className="w-5 h-5 text-[var(--warning)]" />
-            </div>
-            <h3 className="text-lg font-semibold">Skip Permissions</h3>
+      {/* Prime command - featured */}
+      <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--accent)]/30 space-y-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-[var(--accent)]/10 flex items-center justify-center">
+            <Sparkles className="w-5 h-5 text-[var(--accent)]" />
           </div>
-          <Terminal command="claude --dangerously-skip-permissions" />
-          <p className="text-sm text-[var(--muted)]">
-            Claude executes all actions without asking. Use for trusted projects or CI/CD.
+          <div>
+            <h3 className="text-lg font-semibold">The /prime Command</h3>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--accent)]/10 text-[var(--accent)]">Essential</span>
+          </div>
+        </div>
+        <Terminal command="/prime" />
+        <p className="text-sm text-[var(--muted)]">
+          This primes Claude with deep understanding of your codebase. I run this at the start of most sessions -
+          it reads key files, understands your architecture, and makes Claude significantly more helpful.
+        </p>
+      </div>
+
+      {/* Context management row */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Check Context */}
+        <div className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)] space-y-2">
+          <div className="flex items-center gap-2">
+            <Eye className="w-5 h-5 text-[var(--secondary)]" />
+            <h3 className="font-semibold">Check Context</h3>
+          </div>
+          <Terminal command="/context" />
+          <p className="text-xs text-[var(--muted)]">
+            See how much context is used. When it gets large, responses slow down.
           </p>
         </div>
 
-        {/* Resume Session */}
-        <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--surface-light)] space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[var(--secondary)]/10 flex items-center justify-center">
-              <History className="w-5 h-5 text-[var(--secondary)]" />
-            </div>
-            <h3 className="text-lg font-semibold">Resume Session</h3>
+        {/* Export */}
+        <div className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)] space-y-2">
+          <div className="flex items-center gap-2">
+            <Download className="w-5 h-5 text-[var(--success)]" />
+            <h3 className="font-semibold">Export First</h3>
           </div>
-          <Terminal command="claude -resume" />
-          <p className="text-sm text-[var(--muted)]">
-            Continue where you left off. Great for long-running tasks or context preservation.
+          <Terminal command="/export session.md" />
+          <p className="text-xs text-[var(--muted)]">
+            Save important info before clearing. Great for documentation.
           </p>
         </div>
 
-        {/* Clear Session */}
-        <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--surface-light)] space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-red-500/10 flex items-center justify-center">
-              <Trash2 className="w-5 h-5 text-red-500" />
-            </div>
-            <h3 className="text-lg font-semibold">Clear Session</h3>
+        {/* Clear */}
+        <div className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)] space-y-2">
+          <div className="flex items-center gap-2">
+            <Trash2 className="w-5 h-5 text-red-500" />
+            <h3 className="font-semibold">Clear Context</h3>
           </div>
           <Terminal command="/clear" />
-          <p className="text-sm text-[var(--muted)]">
-            Wipe conversation history. Useful when context gets messy or you&apos;re starting fresh.
-          </p>
-        </div>
-
-        {/* Export Session */}
-        <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--surface-light)] space-y-3">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[var(--success)]/10 flex items-center justify-center">
-              <Download className="w-5 h-5 text-[var(--success)]" />
-            </div>
-            <h3 className="text-lg font-semibold">Export Session</h3>
-          </div>
-          <Terminal command="/export conversation.md" />
-          <p className="text-sm text-[var(--muted)]">
-            Save the entire conversation to a file. Perfect for documentation or review.
+          <p className="text-xs text-[var(--muted)]">
+            Fresh start. Do this when context is bloated or you&apos;re switching tasks.
           </p>
         </div>
       </div>
 
-      {/* Warning about skip permissions */}
-      <Gotcha type="warning">
-        <strong>--dangerously-skip-permissions</strong> means Claude can delete files, run any command,
-        and modify anything without asking. Only use this when:
-        <ul className="mt-2 ml-4 space-y-1">
-          <li>• You&apos;re in a sandboxed environment</li>
-          <li>• Running in CI/CD pipelines</li>
-          <li>• Working on personal projects you fully trust</li>
-          <li>• You&apos;ve already reviewed Claude&apos;s plan</li>
-        </ul>
-      </Gotcha>
+      {/* Resume session */}
+      <div className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)]">
+        <div className="flex items-center gap-3 mb-2">
+          <History className="w-5 h-5 text-[var(--secondary)]" />
+          <h3 className="font-semibold">Resume Session</h3>
+        </div>
+        <Terminal command="claude --resume" />
+        <p className="text-sm text-[var(--muted)] mt-2">
+          Continue where you left off. Great for long-running tasks or when you need to step away.
+        </p>
+      </div>
 
       {/* Tip */}
       <Gotcha type="tip">
-        Run <code>/init</code> when starting a new project. This creates a <code>CLAUDE.md</code> file
-        that persists your project&apos;s context across sessions - making Claude smarter about your codebase.
+        <strong>My workflow:</strong> Start with <code>/prime</code>, work until context gets heavy
+        (check with <code>/context</code>), export anything important, then <code>/clear</code> and re-prime.
       </Gotcha>
     </div>
   );

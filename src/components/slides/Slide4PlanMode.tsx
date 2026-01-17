@@ -47,7 +47,7 @@ export function Slide4PlanMode() {
               <span className="font-medium text-[var(--success)]">Auto-Accept</span>
             </div>
             <p className="text-sm text-[var(--muted)]">
-              Claude executes without asking (fast but risky)
+              Claude executes without asking
             </p>
           </div>
           <div className="bg-[var(--surface-light)] rounded-lg p-4 border border-[var(--secondary)]/30">
@@ -60,29 +60,62 @@ export function Slide4PlanMode() {
             </p>
           </div>
         </div>
+        <p className="text-xs text-[var(--muted)] mt-4">
+          <strong>Tip:</strong> When Claude asks permission for a command, selecting &quot;Always allow&quot; saves it to{' '}
+          <code className="text-[var(--accent)]">.claude/settings.json</code> so it won&apos;t ask again.
+        </p>
       </div>
 
-      {/* Commands */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Start in Plan Mode</h3>
-          <Terminal command="claude --permission-mode plan" />
-        </div>
-        <div className="space-y-3">
+      {/* Plan mode command */}
+      <div className="space-y-3">
+        <h3 className="text-lg font-semibold">Start in Plan Mode</h3>
+        <Terminal command="claude --permission-mode plan" />
+        <p className="text-sm text-[var(--muted)]">
+          Let Claude explore your codebase before making changes. Switch to Normal mode when ready to execute.
+        </p>
+      </div>
+
+      {/* /init section - expanded */}
+      <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--accent)]/30">
+        <div className="flex items-center gap-2 mb-3">
           <h3 className="text-lg font-semibold">Initialize Project Memory</h3>
           <Terminal command="/init" />
+        </div>
+
+        <p className="text-sm text-[var(--muted)] mb-4">
+          Creates a <code className="text-[var(--accent)]">CLAUDE.md</code> file that Claude reads at the start of every session.
+          This is your project&apos;s persistent memory - Claude will always know your preferences.
+        </p>
+
+        <div className="bg-[var(--surface-light)] rounded-lg p-4 mb-4">
+          <p className="text-xs font-semibold text-[var(--accent)] mb-2">When to run /init</p>
           <p className="text-sm text-[var(--muted)]">
-            Creates <code className="text-[var(--accent)]">CLAUDE.md</code> with project context
+            I typically run this <strong>after the AskUserQuestionTool interview</strong>. Once Claude understands
+            your project through the Q&amp;A, it can generate a much better CLAUDE.md with accurate context.
           </p>
         </div>
-      </div>
 
-      {/* Gotcha */}
-      <Gotcha type="warning">
-        Always start complex tasks in <strong>Plan Mode</strong>. Let Claude explore and understand
-        your codebase before making changes. You can switch to Normal mode when you&apos;re ready
-        to execute.
-      </Gotcha>
+        <p className="text-xs font-semibold text-[var(--muted)] mb-2">What to include in CLAUDE.md:</p>
+        <div className="bg-[var(--background)] rounded-lg p-3 font-mono text-xs overflow-x-auto">
+          <pre className="text-[var(--muted)]">{`# Project: My App
+
+## Brand & Design
+- Primary: #6366f1 (Indigo)
+- Secondary: #ec4899 (Pink)
+- Font: Inter for UI, JetBrains Mono for code
+- Style: Minimal, lots of whitespace, rounded corners
+
+## Tech Stack
+- Next.js 14 with App Router
+- Tailwind CSS
+- Prisma + PostgreSQL
+
+## Conventions
+- Use 'cn' helper for conditional classes
+- All components in src/components/
+- Prefer server components unless state needed`}</pre>
+        </div>
+      </div>
 
       {/* Quick reference */}
       <div className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)]">
@@ -105,6 +138,9 @@ export function Slide4PlanMode() {
             <span className="text-[var(--muted)] ml-2">History</span>
           </div>
         </div>
+        <p className="text-xs text-[var(--muted)] mt-3">
+          <strong>Mac:</strong> Use <kbd className="px-1 py-0.5 rounded bg-[var(--surface-light)] text-xs">⌘+C</kbd> for Cancel and <kbd className="px-1 py-0.5 rounded bg-[var(--surface-light)] text-xs">⌘+L</kbd> for Clear screen
+        </p>
       </div>
     </div>
   );

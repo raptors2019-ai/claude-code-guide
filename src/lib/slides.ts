@@ -12,7 +12,7 @@ export const slides: SlideMetadata[] = [
   { id: 3, title: 'The North Star Workflow', section: 'main', description: 'Spec → Plan → Execute' },
   { id: 4, title: 'Writing Your spec.md', section: 'main', description: 'The template that drives great results' },
   { id: 5, title: 'Plan Mode & Controls', section: 'main', description: 'Essential keyboard shortcuts and modes' },
-  { id: 6, title: 'Power User Features', section: 'main', description: 'Skip permissions, resume, and more' },
+  { id: 6, title: 'Session Management', section: 'main', description: 'Context, /prime, and session workflow' },
   { id: 7, title: 'Skills & Integrations', section: 'main', description: 'Extend Claude Code with plugins and MCPs' },
   { id: 8, title: 'Full Walkthrough', section: 'main', description: 'Building a feature from start to finish' },
   // Appendix

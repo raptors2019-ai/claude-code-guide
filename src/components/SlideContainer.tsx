@@ -15,7 +15,7 @@ export function SlideContainer({ slideId, children }: SlideContainerProps) {
     <div className="min-h-screen flex flex-col bg-[var(--background)]">
       <Navigation currentSlide={slideId} />
 
-      <main className="flex-1 flex items-center justify-center px-6 sm:px-12 lg:px-20 pt-20 pb-24">
+      <main className="flex-1 flex items-center justify-center px-6 sm:px-12 lg:px-24 xl:px-32 pt-20 pb-24">
         <div className="max-w-4xl w-full">
           {children}
         </div>
