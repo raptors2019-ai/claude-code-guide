@@ -182,7 +182,7 @@ export function Slide5PowerUser() {
               <Sparkles className="w-5 h-5 text-[var(--accent)]" />
             </div>
             <div className="text-left">
-              <h3 className="font-semibold">/prime - Project Context Loader</h3>
+              <h3 className="font-semibold">/prime - Project Context Loader <span className="text-xs font-normal text-[var(--muted)]">(copy me to your project!)</span></h3>
               <p className="text-sm text-[var(--muted)]">
                 Start every session with full codebase understanding. Click to view the skill.
               </p>

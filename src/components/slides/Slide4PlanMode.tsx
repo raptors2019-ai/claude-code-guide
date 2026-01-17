@@ -1,7 +1,8 @@
 'use client';
 
 import { Terminal, Gotcha } from '../ui';
-import { ToggleLeft, Eye, Play, Keyboard } from 'lucide-react';
+import { ToggleLeft, Eye, Play, Keyboard, FileText } from 'lucide-react';
+import Link from 'next/link';
 
 export function Slide4PlanMode() {
   return (
@@ -138,10 +139,28 @@ export function Slide4PlanMode() {
             <span className="text-[var(--muted)] ml-2">History</span>
           </div>
         </div>
-        <p className="text-xs text-[var(--muted)] mt-3">
-          <strong>Mac:</strong> Use <kbd className="px-1 py-0.5 rounded bg-[var(--surface-light)] text-xs">⌘+C</kbd> for Cancel and <kbd className="px-1 py-0.5 rounded bg-[var(--surface-light)] text-xs">⌘+L</kbd> for Clear screen
-        </p>
+        <div className="flex items-center justify-between mt-3">
+          <p className="text-xs text-[var(--muted)]">
+            <strong>Mac:</strong> Use <kbd className="px-1 py-0.5 rounded bg-[var(--surface-light)] text-xs">⌘+C</kbd> for Cancel and <kbd className="px-1 py-0.5 rounded bg-[var(--surface-light)] text-xs">⌘+L</kbd> for Clear screen
+          </p>
+          <Link
+            href="/slide/9"
+            className="inline-flex items-center gap-1.5 text-xs text-[var(--accent)] hover:underline"
+          >
+            <Keyboard className="w-3 h-3" />
+            Full shortcuts reference →
+          </Link>
+        </div>
       </div>
+
+      {/* Link to CLAUDE.md template */}
+      <Link
+        href="/slide/11"
+        className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline"
+      >
+        <FileText className="w-4 h-4" />
+        See full CLAUDE.md template in the appendix →
+      </Link>
     </div>
   );
 }

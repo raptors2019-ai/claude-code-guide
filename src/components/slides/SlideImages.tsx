@@ -1,7 +1,8 @@
 'use client';
 
 import { Terminal, Gotcha, CodeBlock } from '../ui';
-import { Image, MousePointer, Paintbrush, Monitor } from 'lucide-react';
+import { Image, MousePointer, Paintbrush, Monitor, Bug, Play } from 'lucide-react';
+import Link from 'next/link';
 
 export function SlideImages() {
   const makeItLookPrompt = `Here's a screenshot of the design I want.
@@ -95,6 +96,44 @@ Make my component look like this, matching:
         <strong>Pro tip:</strong> Screenshots work great with the spec workflow too.
         Include mockups in your spec.md discussion and Claude will reference them when building.
       </Gotcha>
+
+      {/* Localhost & Playwright section */}
+      <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--surface-border)]">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-10 h-10 rounded-lg bg-[var(--secondary)]/10 flex items-center justify-center flex-shrink-0">
+            <Bug className="w-5 h-5 text-[var(--secondary)]" />
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1">Debugging with Screenshots</h3>
+            <p className="text-sm text-[var(--muted)]">
+              Screenshot your localhost output to show Claude exactly what&apos;s broken.
+              Much faster than describing layout issues in words.
+            </p>
+          </div>
+        </div>
+        <div className="flex items-start gap-4">
+          <div className="w-10 h-10 rounded-lg bg-[var(--success)]/10 flex items-center justify-center flex-shrink-0">
+            <Play className="w-5 h-5 text-[var(--success)]" />
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1">Automate with Playwright</h3>
+            <p className="text-sm text-[var(--muted)]">
+              Use the Playwright MCP or skill to let Claude take screenshots automatically,
+              interact with your app, and verify fixes without manual screenshotting.
+            </p>
+            <Terminal command="claude mcp add playwright -- npx @anthropic/mcp-playwright" />
+          </div>
+        </div>
+      </div>
+
+      {/* Link to error recovery */}
+      <Link
+        href="/slide/14"
+        className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline"
+      >
+        <Bug className="w-4 h-4" />
+        More debugging tips in Error Recovery →
+      </Link>
     </div>
   );
 }

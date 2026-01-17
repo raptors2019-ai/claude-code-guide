@@ -231,6 +231,12 @@ export function Slide6Skills() {
         />
       </div>
 
+      <Gotcha type="tip">
+        The <code>description</code> field is the magic - it tells Claude which keywords and contexts
+        should trigger the skill. Write it once, and every future session benefits automatically.
+        Your skills compound over time as you build your personal toolkit.
+      </Gotcha>
+
       {/* MCP Examples - AT BOTTOM */}
       <div className="space-y-3">
         <h3 className="text-lg font-semibold">Popular MCP Integrations</h3>
@@ -238,13 +244,14 @@ export function Slide6Skills() {
           <Terminal command="claude mcp add --transport http github https://api.githubcopilot.com/mcp/" />
           <Terminal command="claude mcp add --transport http sentry https://mcp.sentry.dev/mcp" />
         </div>
+        <a
+          href="/slide/12"
+          className="inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:underline mt-2"
+        >
+          <Globe className="w-4 h-4" />
+          See more MCP integrations in the appendix →
+        </a>
       </div>
-
-      <Gotcha type="tip">
-        The <code>description</code> field is the magic - it tells Claude which keywords and contexts
-        should trigger the skill. Write it once, and every future session benefits automatically.
-        Your skills compound over time as you build your personal toolkit.
-      </Gotcha>
     </div>
   );
 }
