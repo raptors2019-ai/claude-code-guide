@@ -9,21 +9,19 @@ export const slides: SlideMetadata[] = [
   // Main slides
   { id: 1, title: 'Welcome to Claude Code', section: 'main', description: 'What is Claude Code and why use it' },
   { id: 2, title: 'Getting Started', section: 'main', description: '5 essential things to know' },
-  { id: 3, title: 'The North Star Workflow', section: 'main', description: 'Spec → Plan → Execute' },
-  { id: 4, title: 'Writing Your spec.md', section: 'main', description: 'The template that drives great results' },
-  { id: 5, title: 'Plan Mode & Controls', section: 'main', description: 'Essential keyboard shortcuts and modes' },
-  { id: 6, title: 'Session Management', section: 'main', description: 'Context, /prime, and session workflow' },
-  { id: 7, title: 'Skills & Integrations', section: 'main', description: 'Extend Claude Code with plugins and MCPs' },
-  { id: 8, title: 'Screenshots & Images', section: 'main', description: 'Visual input for UI work' },
-  { id: 9, title: 'Full Walkthrough', section: 'main', description: 'Building a feature from start to finish' },
+  { id: 3, title: 'Spec → Plan → Execute', section: 'main', description: 'The core workflow for most tasks' },
+  { id: 4, title: 'Plan Mode & Controls', section: 'main', description: 'Essential keyboard shortcuts and modes' },
+  { id: 5, title: 'Session Management', section: 'main', description: 'Context, /prime, and session workflow' },
+  { id: 6, title: 'Skills & Integrations', section: 'main', description: 'Extend Claude Code with plugins and MCPs' },
+  { id: 7, title: 'Screenshots & Images', section: 'main', description: 'Visual input for UI work' },
+  { id: 8, title: 'Full Walkthrough', section: 'main', description: 'Building a feature from start to finish' },
   // Appendix
-  { id: 10, title: 'Keyboard Shortcuts', section: 'appendix', description: 'Complete cheat sheet' },
-  { id: 11, title: 'Commands & References', section: 'appendix', description: 'Slash commands and @ file refs' },
-  { id: 12, title: 'Prompt Patterns', section: 'appendix', description: 'Curated prompts that work' },
-  { id: 13, title: 'CLAUDE.md Template', section: 'appendix', description: 'Project memory structure' },
-  { id: 14, title: 'MCP Integrations', section: 'appendix', description: 'Connect to external tools' },
-  { id: 15, title: 'Git Workflow', section: 'appendix', description: 'Branches, commits, and PRs' },
-  { id: 16, title: 'Error Recovery', section: 'appendix', description: 'When things go wrong' },
+  { id: 9, title: 'Keyboard Shortcuts', section: 'appendix', description: 'Complete cheat sheet' },
+  { id: 10, title: 'Prompt Patterns', section: 'appendix', description: 'Curated prompts that work' },
+  { id: 11, title: 'CLAUDE.md Template', section: 'appendix', description: 'Project memory structure' },
+  { id: 12, title: 'MCP Integrations', section: 'appendix', description: 'Connect to external tools' },
+  { id: 13, title: 'Git Workflow', section: 'appendix', description: 'Branches, commits, and PRs' },
+  { id: 14, title: 'Error Recovery', section: 'appendix', description: 'When things go wrong' },
 ];
 
 export const totalSlides = slides.length;

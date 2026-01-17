@@ -8,10 +8,10 @@ export function Slide2Workflow() {
       {/* Title */}
       <div className="space-y-4">
         <h1 className="text-4xl font-bold tracking-tight">
-          The <span className="gradient-text">North Star</span> Workflow
+          Spec → Plan → Execute
         </h1>
         <p className="text-xl text-[var(--muted)] leading-relaxed">
-          This is the pattern you&apos;ll use 80% of the time
+          The workflow for most tasks
         </p>
       </div>
 

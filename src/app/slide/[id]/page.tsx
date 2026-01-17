@@ -6,14 +6,12 @@ import { SlideContainer } from '@/components/SlideContainer';
 import { Slide1Welcome } from '@/components/slides/Slide1Welcome';
 import { Slide2GettingStarted } from '@/components/slides/Slide2GettingStarted';
 import { Slide2Workflow } from '@/components/slides/Slide2Workflow';
-import { Slide3SpecMd } from '@/components/slides/Slide3SpecMd';
 import { Slide4PlanMode } from '@/components/slides/Slide4PlanMode';
 import { Slide5PowerUser } from '@/components/slides/Slide5PowerUser';
 import { Slide6Skills } from '@/components/slides/Slide6Skills';
 import { SlideImages } from '@/components/slides/SlideImages';
 import { Slide7Walkthrough } from '@/components/slides/Slide7Walkthrough';
 import { Slide8Shortcuts } from '@/components/slides/Slide8Shortcuts';
-import { Slide9Commands } from '@/components/slides/Slide9Commands';
 import { Slide10Prompts } from '@/components/slides/Slide10Prompts';
 import { Slide11ClaudeMd } from '@/components/slides/Slide11ClaudeMd';
 import { Slide12MCP } from '@/components/slides/Slide12MCP';
@@ -24,19 +22,17 @@ const slideComponents: Record<number, React.ComponentType> = {
   1: Slide1Welcome,
   2: Slide2GettingStarted,
   3: Slide2Workflow,
-  4: Slide3SpecMd,
-  5: Slide4PlanMode,
-  6: Slide5PowerUser,
-  7: Slide6Skills,
-  8: SlideImages,
-  9: Slide7Walkthrough,
-  10: Slide8Shortcuts,
-  11: Slide9Commands,
-  12: Slide10Prompts,
-  13: Slide11ClaudeMd,
-  14: Slide12MCP,
-  15: SlideGit,
-  16: SlideErrors,
+  4: Slide4PlanMode,
+  5: Slide5PowerUser,
+  6: Slide6Skills,
+  7: SlideImages,
+  8: Slide7Walkthrough,
+  9: Slide8Shortcuts,
+  10: Slide10Prompts,
+  11: Slide11ClaudeMd,
+  12: Slide12MCP,
+  13: SlideGit,
+  14: SlideErrors,
 };
 
 export function generateStaticParams() {

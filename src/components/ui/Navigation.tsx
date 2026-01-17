@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, List } from 'lucide-react';
-import { getNextSlide, getPrevSlide, slides, mainSlides, appendixSlides } from '@/lib/slides';
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { getNextSlide, getPrevSlide, mainSlides, appendixSlides } from '@/lib/slides';
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -13,138 +13,125 @@ interface NavigationProps {
 export function Navigation({ currentSlide }: NavigationProps) {
   const prevSlide = getPrevSlide(currentSlide);
   const nextSlide = getNextSlide(currentSlide);
-  const [tocOpen, setTocOpen] = useState(false);
-  const tocRef = useRef<HTMLDivElement>(null);
-
-  // Close TOC when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (tocRef.current && !tocRef.current.contains(event.target as Node)) {
-        setTocOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Close TOC on escape key
-  useEffect(() => {
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        setTocOpen(false);
-      }
-    }
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, []);
+  const [appendixOpen, setAppendixOpen] = useState(() => {
+    // Start expanded if current slide is in appendix
+    return appendixSlides.some(s => s.id === currentSlide);
+  });
 
   return (
     <>
-      {/* Top bar with theme toggle */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo / Title with TOC */}
-          <div className="flex items-center gap-3">
-            <Link
-              href="/slide/1"
-              className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
-            >
-              <span className="w-8 h-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
-                <span className="text-white font-bold text-sm">CC</span>
-              </span>
-              <span className="font-semibold text-sm hidden sm:block">Claude Code Guide</span>
-            </Link>
+      {/* Left Sidebar */}
+      <aside className="fixed left-0 top-0 bottom-0 w-64 bg-[var(--surface)]/95 backdrop-blur-sm border-r border-[var(--surface-border)] z-50 overflow-y-auto hidden lg:block">
+        {/* Logo */}
+        <div className="p-4 border-b border-[var(--surface-border)]">
+          <Link
+            href="/slide/1"
+            className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+          >
+            <span className="w-8 h-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
+              <span className="text-white font-bold text-sm">CC</span>
+            </span>
+            <span className="font-semibold text-sm">Claude Code Guide</span>
+          </Link>
+        </div>
 
-            {/* TOC Dropdown */}
-            <div className="relative" ref={tocRef}>
-              <button
-                onClick={() => setTocOpen(!tocOpen)}
-                className="p-2 rounded-lg bg-[var(--surface)] border border-[var(--surface-border)]
-                           text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--accent)]
-                           transition-all duration-200"
-                aria-label="Table of contents"
-              >
-                <List className="w-4 h-4" />
-              </button>
-
-              {tocOpen && (
-                <div className="absolute top-full left-0 mt-2 w-72 bg-[var(--surface)] border border-[var(--surface-border)]
-                                rounded-xl shadow-[var(--shadow-lg)] overflow-hidden animate-fade-in z-50">
-                  {/* Main Slides */}
-                  <div className="p-2">
-                    <div className="px-3 py-1 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">
-                      Main
-                    </div>
-                    {mainSlides.map((slide) => (
-                      <Link
-                        key={slide.id}
-                        href={`/slide/${slide.id}`}
-                        onClick={() => setTocOpen(false)}
-                        className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
-                          currentSlide === slide.id
-                            ? 'bg-[var(--accent)]/10 text-[var(--accent)] font-medium'
-                            : 'text-[var(--foreground)] hover:bg-[var(--surface-light)]'
-                        }`}
-                      >
-                        <span className="text-[var(--muted)] mr-2">{slide.id}.</span>
-                        {slide.title}
-                      </Link>
-                    ))}
-                  </div>
-
-                  {/* Divider */}
-                  <div className="border-t border-[var(--surface-border)]" />
-
-                  {/* Appendix Slides */}
-                  <div className="p-2">
-                    <div className="px-3 py-1 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">
-                      Appendix
-                    </div>
-                    {appendixSlides.map((slide) => (
-                      <Link
-                        key={slide.id}
-                        href={`/slide/${slide.id}`}
-                        onClick={() => setTocOpen(false)}
-                        className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
-                          currentSlide === slide.id
-                            ? 'bg-[var(--accent)]/10 text-[var(--accent)] font-medium'
-                            : 'text-[var(--foreground)] hover:bg-[var(--surface-light)]'
-                        }`}
-                      >
-                        <span className="text-[var(--muted)] mr-2">{slide.id}.</span>
-                        {slide.title}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
+        {/* Main Slides - Always expanded */}
+        <div className="p-3">
+          <div className="px-3 py-2 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider">
+            Main
           </div>
+          <nav className="space-y-1">
+            {mainSlides.map((slide) => (
+              <Link
+                key={slide.id}
+                href={`/slide/${slide.id}`}
+                className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
+                  currentSlide === slide.id
+                    ? 'bg-[var(--accent)]/10 text-[var(--accent)] font-medium border border-[var(--accent)]/30'
+                    : 'text-[var(--foreground)] hover:bg-[var(--surface-light)]'
+                }`}
+              >
+                <span className="text-[var(--muted)] mr-2">{slide.id}.</span>
+                {slide.title}
+              </Link>
+            ))}
+          </nav>
+        </div>
 
-          {/* Theme toggle */}
+        {/* Appendix - Collapsible */}
+        <div className="p-3 pt-0">
+          <button
+            onClick={() => setAppendixOpen(!appendixOpen)}
+            className="w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[var(--muted)] uppercase tracking-wider hover:text-[var(--foreground)] transition-colors"
+          >
+            <span>Appendix</span>
+            <ChevronDown
+              className={`w-4 h-4 transition-transform duration-200 ${
+                appendixOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
+          {appendixOpen && (
+            <nav className="space-y-1 animate-fade-in">
+              {appendixSlides.map((slide) => (
+                <Link
+                  key={slide.id}
+                  href={`/slide/${slide.id}`}
+                  className={`block px-3 py-2 rounded-lg text-sm transition-colors ${
+                    currentSlide === slide.id
+                      ? 'bg-[var(--secondary)]/10 text-[var(--secondary)] font-medium border border-[var(--secondary)]/30'
+                      : 'text-[var(--foreground)] hover:bg-[var(--surface-light)]'
+                  }`}
+                >
+                  <span className="text-[var(--muted)] mr-2">{slide.id}.</span>
+                  {slide.title}
+                </Link>
+              ))}
+            </nav>
+          )}
+        </div>
+
+        {/* Theme toggle at bottom */}
+        <div className="absolute bottom-4 left-4">
+          <ThemeToggle />
+        </div>
+      </aside>
+
+      {/* Mobile header - shown only on smaller screens */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 py-3 bg-[var(--surface)]/95 backdrop-blur-sm border-b border-[var(--surface-border)] lg:hidden">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/slide/1"
+            className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+          >
+            <span className="w-8 h-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
+              <span className="text-white font-bold text-sm">CC</span>
+            </span>
+            <span className="font-semibold text-sm">Claude Code Guide</span>
+          </Link>
           <ThemeToggle />
         </div>
       </header>
 
-      {/* Left navigation */}
+      {/* Arrow navigation - adjusted for sidebar */}
       {prevSlide && (
         <Link
           href={`/slide/${prevSlide}`}
-          className="nav-arrow fixed left-4 top-1/2 -translate-y-1/2 p-3 rounded-xl
+          className="nav-arrow fixed left-[calc(16rem+1rem)] lg:left-[calc(16rem+1rem)] top-1/2 -translate-y-1/2 p-3 rounded-xl
                      bg-[var(--surface)] border border-[var(--surface-border)]
                      text-[var(--muted)] shadow-[var(--shadow-md)]
                      hover:text-[var(--foreground)] hover:border-[var(--accent)]
                      hover:shadow-[var(--shadow-lg)] hover:scale-105
                      active:scale-95
                      transition-all duration-200 z-40
-                     group"
+                     group
+                     max-lg:left-4"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
         </Link>
       )}
 
-      {/* Right navigation */}
       {nextSlide && (
         <Link
           href={`/slide/${nextSlide}`}
