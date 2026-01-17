@@ -17,6 +17,22 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Claude Code Guide",
   description: "A practical guide to using Claude Code effectively",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg",
+  },
+  openGraph: {
+    title: "Claude Code Guide",
+    description: "A practical guide to using Claude Code effectively",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Claude Code Guide",
+    description: "A practical guide to using Claude Code effectively",
+  },
 };
 
 export default function RootLayout({
