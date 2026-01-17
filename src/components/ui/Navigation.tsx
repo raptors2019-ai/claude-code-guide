@@ -18,6 +18,9 @@ export function Navigation({ currentSlide }: NavigationProps) {
     return appendixSlides.some(s => s.id === currentSlide);
   });
 
+  const totalSlides = mainSlides.length + appendixSlides.length;
+  const currentIndex = [...mainSlides, ...appendixSlides].findIndex(s => s.id === currentSlide) + 1;
+
   return (
     <>
       {/* Left Sidebar */}
@@ -98,26 +101,29 @@ export function Navigation({ currentSlide }: NavigationProps) {
       </aside>
 
       {/* Mobile header - shown only on smaller screens */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 py-3 bg-[var(--surface)]/95 backdrop-blur-sm border-b border-[var(--surface-border)] lg:hidden">
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 py-2 bg-[var(--surface)]/95 backdrop-blur-sm border-b border-[var(--surface-border)] lg:hidden">
         <div className="flex items-center justify-between">
           <Link
             href="/slide/1"
             className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
           >
-            <span className="w-8 h-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">CC</span>
+            <span className="w-7 h-7 rounded-lg bg-[var(--accent)] flex items-center justify-center">
+              <span className="text-white font-bold text-xs">CC</span>
             </span>
-            <span className="font-semibold text-sm">Claude Code Guide</span>
           </Link>
+          <span className="text-sm text-[var(--muted)] tabular-nums">
+            {currentIndex} / {totalSlides}
+          </span>
           <ThemeToggle />
         </div>
       </header>
 
-      {/* Arrow navigation - adjusted for sidebar */}
+      {/* Arrow navigation - side arrows on desktop, bottom bar on mobile */}
+      {/* Desktop arrows */}
       {prevSlide && (
         <Link
           href={`/slide/${prevSlide}`}
-          className="nav-arrow fixed left-[calc(16rem+1rem)] lg:left-[calc(16rem+1rem)] top-1/2 -translate-y-1/2 p-3 rounded-xl
+          className="nav-arrow fixed left-[calc(16rem+1rem)] top-1/2 -translate-y-1/2 p-3 rounded-xl
                      bg-[var(--surface)] border border-[var(--surface-border)]
                      text-[var(--muted)] shadow-[var(--shadow-md)]
                      hover:text-[var(--foreground)] hover:border-[var(--accent)]
@@ -125,7 +131,7 @@ export function Navigation({ currentSlide }: NavigationProps) {
                      active:scale-95
                      transition-all duration-200 z-40
                      group
-                     max-lg:left-4"
+                     hidden lg:flex"
           aria-label="Previous slide"
         >
           <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
@@ -142,12 +148,45 @@ export function Navigation({ currentSlide }: NavigationProps) {
                      hover:shadow-[var(--shadow-lg)] hover:scale-105
                      active:scale-95
                      transition-all duration-200 z-40
-                     group"
+                     group
+                     hidden lg:flex"
           aria-label="Next slide"
         >
           <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
         </Link>
       )}
+
+      {/* Mobile bottom navigation */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 px-4 py-3 bg-[var(--surface)]/95 backdrop-blur-sm border-t border-[var(--surface-border)] lg:hidden">
+        <div className="flex items-center justify-between gap-4">
+          {prevSlide ? (
+            <Link
+              href={`/slide/${prevSlide}`}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl
+                         bg-[var(--surface-light)] border border-[var(--surface-border)]
+                         text-[var(--foreground)] active:scale-95 transition-all"
+            >
+              <ChevronLeft className="w-5 h-5" />
+              <span className="text-sm font-medium">Previous</span>
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+
+          {nextSlide ? (
+            <Link
+              href={`/slide/${nextSlide}`}
+              className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl
+                         bg-[var(--accent)] text-white active:scale-95 transition-all"
+            >
+              <span className="text-sm font-medium">Next</span>
+              <ChevronRight className="w-5 h-5" />
+            </Link>
+          ) : (
+            <div className="flex-1" />
+          )}
+        </div>
+      </div>
     </>
   );
 }

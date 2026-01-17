@@ -47,37 +47,6 @@ export function Slide2GettingStarted() {
         and you have git to recover if needed.
       </Gotcha>
 
-      {/* Slash commands */}
-      <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--surface-light)]">
-        <h3 className="text-sm font-semibold text-[var(--foreground)] mb-2">Slash Commands</h3>
-        <div className="flex items-center gap-3 mb-2">
-          <kbd className="px-2 py-1 rounded bg-[var(--surface-light)] text-sm font-mono">/ + command</kbd>
-          <span className="text-sm text-[var(--muted)]">Run saved prompts</span>
-        </div>
-        <p className="text-sm text-[var(--muted)] mb-3">
-          Create slash commands for prompts you type repeatedly. If you find yourself copy-pasting
-          the same instructions, save them as a command instead.
-        </p>
-        <div className="bg-[var(--surface-light)] rounded-lg p-3 mb-2">
-          <p className="text-xs font-mono text-[var(--muted)]">
-            .claude/commands/<span className="text-[var(--accent)]">my-command</span>.md
-          </p>
-        </div>
-        <p className="text-xs text-[var(--muted)]">
-          Create a <code className="text-[var(--accent)]">.claude/commands/</code> folder, add markdown files for each command.
-          Restart your terminal if new commands don&apos;t appear immediately.
-        </p>
-      </div>
-
-      {/* Next up callout */}
-      <div className="text-center p-4 rounded-xl bg-[var(--accent)]/5 border border-[var(--accent)]/20">
-        <p className="text-[var(--foreground)] font-medium">
-          Next up: The spec.md template
-        </p>
-        <p className="text-sm text-[var(--muted)] mt-1">
-          The single most important file for getting great results from Claude.
-        </p>
-      </div>
     </div>
   );
 }

@@ -15,8 +15,8 @@ export function SlideContainer({ slideId, children }: SlideContainerProps) {
     <div className="min-h-screen flex flex-col bg-[var(--background)]">
       <Navigation currentSlide={slideId} />
 
-      {/* Main content - offset for sidebar on large screens */}
-      <main className="flex-1 flex items-center justify-center px-6 sm:px-12 lg:pl-72 lg:pr-12 xl:pr-24 pt-20 lg:pt-12 pb-8">
+      {/* Main content - offset for sidebar on large screens, bottom nav on mobile */}
+      <main className="flex-1 flex items-start lg:items-center justify-center px-4 sm:px-6 lg:pl-72 lg:pr-12 xl:pr-24 pt-14 lg:pt-12 pb-24 lg:pb-8">
         <div className="max-w-4xl w-full">
           {children}
         </div>

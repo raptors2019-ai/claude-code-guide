@@ -9,8 +9,8 @@ interface ProgressBarProps {
 
 export function ProgressBar({ currentSlide }: ProgressBarProps) {
   return (
-    <div className="fixed top-0 left-0 right-0 lg:left-64 z-30 px-4 py-2 flex items-center justify-center">
-      {/* Clickable slide dots */}
+    <div className="fixed top-0 left-0 right-0 lg:left-64 z-30 px-4 py-2 items-center justify-center hidden lg:flex">
+      {/* Clickable slide dots - hidden on mobile */}
       <div className="flex items-center gap-1 bg-[var(--surface)]/80 backdrop-blur-sm rounded-full px-3 py-1.5 border border-[var(--surface-border)]">
         {/* Main slides */}
         {mainSlides.map((slide) => (
