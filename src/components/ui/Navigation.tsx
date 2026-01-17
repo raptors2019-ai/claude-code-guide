@@ -99,7 +99,7 @@ export function Navigation({ currentSlide }: NavigationProps) {
 
       {/* Mobile header - shown only on smaller screens */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 py-3 bg-[var(--surface)]/95 backdrop-blur-sm border-b border-[var(--surface-border)] lg:hidden">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-center">
           <Link
             href="/slide/1"
             className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
@@ -109,7 +109,6 @@ export function Navigation({ currentSlide }: NavigationProps) {
             </span>
             <span className="font-semibold text-sm">Claude Code Guide</span>
           </Link>
-          <ThemeToggle />
         </div>
       </header>
 

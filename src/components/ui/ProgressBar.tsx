@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { totalSlides, slides, mainSlides, appendixSlides } from '@/lib/slides';
+import { ThemeToggle } from './ThemeToggle';
 
 interface ProgressBarProps {
   currentSlide: number;
@@ -18,21 +19,26 @@ export function ProgressBar({ currentSlide }: ProgressBarProps) {
     : null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-[var(--surface)]/95 backdrop-blur-sm border-t border-[var(--surface-border)] px-6 py-3 z-50">
+    <div className="fixed bottom-0 left-0 right-0 lg:left-64 bg-[var(--surface)]/95 backdrop-blur-sm border-t border-[var(--surface-border)] px-6 py-3 z-40">
       <div className="max-w-4xl mx-auto">
         {/* Title and count */}
         <div className="flex items-center justify-between mb-3">
           <span className="text-sm text-[var(--muted)]">
             {(hoveredSlideData || currentSlideData)?.section === 'appendix' && (
-              <span className="text-[var(--accent)] font-medium mr-2">Appendix:</span>
+              <span className="text-[var(--secondary)] font-medium mr-2">Appendix:</span>
             )}
             <span className="font-medium text-[var(--foreground-secondary)]">
               {hoveredSlideData?.title || currentSlideData?.title}
             </span>
           </span>
-          <span className="text-sm text-[var(--muted)] tabular-nums">
-            {currentIndex + 1} / {totalSlides}
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-[var(--muted)] tabular-nums">
+              {currentIndex + 1} / {totalSlides}
+            </span>
+            <div className="lg:hidden">
+              <ThemeToggle />
+            </div>
+          </div>
         </div>
 
         {/* Clickable slide blocks */}
