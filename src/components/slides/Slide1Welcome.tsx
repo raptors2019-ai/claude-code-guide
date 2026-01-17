@@ -12,7 +12,7 @@ export function Slide1Welcome() {
           A Practical Guide
         </div>
         <h1 className="text-5xl font-bold tracking-tight">
-          Welcome to <span className="gradient-text">Claude Code</span>
+          Welcome to <span className="text-[var(--accent)]">Claude Code</span>
         </h1>
         <p className="text-xl text-[var(--muted)] max-w-2xl mx-auto leading-relaxed">
           Your AI pair programmer that lives in the terminal
@@ -53,9 +53,7 @@ export function Slide1Welcome() {
       </div>
 
       {/* Key difference */}
-      <div className="relative bg-[var(--surface)] rounded-2xl p-6 border border-[var(--surface-border)] shadow-[var(--shadow-md)] mt-8 overflow-hidden">
-        {/* Subtle gradient accent */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[var(--accent)] via-[var(--secondary)] to-[var(--accent)]" />
+      <div className="bg-[var(--surface)] rounded-2xl p-6 border border-[var(--surface-border)] shadow-[var(--shadow-md)] mt-8 border-t-2 border-t-[var(--accent)]">
         <h3 className="text-lg font-semibold mb-3">The Mental Model</h3>
         <p className="text-[var(--muted)] leading-relaxed">
           Think of Claude Code as a <span className="text-[var(--foreground)] font-medium">senior developer pair programming with you</span>.

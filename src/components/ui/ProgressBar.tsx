@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { slides, mainSlides, appendixSlides } from '@/lib/slides';
+import { mainSlides, appendixSlides } from '@/lib/slides';
+import { ThemeToggle } from './ThemeToggle';
 
 interface ProgressBarProps {
   currentSlide: number;
@@ -9,8 +10,11 @@ interface ProgressBarProps {
 
 export function ProgressBar({ currentSlide }: ProgressBarProps) {
   return (
-    <div className="fixed top-0 left-0 right-0 lg:left-64 z-30 px-4 py-2 items-center justify-center hidden lg:flex">
-      {/* Clickable slide dots - hidden on mobile */}
+    <div className="fixed top-0 left-0 right-0 lg:left-64 z-30 px-4 py-2 items-center justify-between hidden lg:flex">
+      {/* Spacer for balance */}
+      <div className="w-10" />
+
+      {/* Clickable slide dots */}
       <div className="flex items-center gap-1 bg-[var(--surface)]/80 backdrop-blur-sm rounded-full px-3 py-1.5 border border-[var(--surface-border)]">
         {/* Main slides */}
         {mainSlides.map((slide) => (
@@ -45,6 +49,9 @@ export function ProgressBar({ currentSlide }: ProgressBarProps) {
           />
         ))}
       </div>
+
+      {/* Theme toggle */}
+      <ThemeToggle />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
-import { getNextSlide, getPrevSlide, mainSlides, appendixSlides } from '@/lib/slides';
+import { getNextSlide, getPrevSlide, getSlide, mainSlides, appendixSlides } from '@/lib/slides';
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -11,8 +11,10 @@ interface NavigationProps {
 }
 
 export function Navigation({ currentSlide }: NavigationProps) {
-  const prevSlide = getPrevSlide(currentSlide);
-  const nextSlide = getNextSlide(currentSlide);
+  const prevSlideId = getPrevSlide(currentSlide);
+  const nextSlideId = getNextSlide(currentSlide);
+  const prevSlideData = prevSlideId ? getSlide(prevSlideId) : null;
+  const nextSlideData = nextSlideId ? getSlide(nextSlideId) : null;
   const [appendixOpen, setAppendixOpen] = useState(() => {
     // Start expanded if current slide is in appendix
     return appendixSlides.some(s => s.id === currentSlide);
@@ -120,48 +122,62 @@ export function Navigation({ currentSlide }: NavigationProps) {
 
       {/* Arrow navigation - side arrows on desktop, bottom bar on mobile */}
       {/* Desktop arrows */}
-      {prevSlide && (
+      {prevSlideId && (
         <Link
-          href={`/slide/${prevSlide}`}
-          className="nav-arrow fixed left-[calc(16rem+1rem)] top-1/2 -translate-y-1/2 p-3 rounded-xl
-                     bg-[var(--surface)] border border-[var(--surface-border)]
-                     text-[var(--muted)] shadow-[var(--shadow-md)]
-                     hover:text-[var(--foreground)] hover:border-[var(--accent)]
-                     hover:shadow-[var(--shadow-lg)] hover:scale-105
-                     active:scale-95
+          href={`/slide/${prevSlideId}`}
+          className="nav-arrow fixed left-[calc(16rem+1rem)] top-1/2 -translate-y-1/2
+                     flex flex-col items-center gap-1
                      transition-all duration-200 z-40
                      group
                      hidden lg:flex"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
+          <div className="p-3 rounded-xl bg-[var(--surface)] border border-[var(--surface-border)]
+                          text-[var(--muted)] shadow-[var(--shadow-md)]
+                          group-hover:text-[var(--foreground)] group-hover:border-[var(--accent)]
+                          group-hover:shadow-[var(--shadow-lg)] group-hover:scale-105
+                          active:scale-95 transition-all duration-200">
+            <ChevronLeft className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" />
+          </div>
+          {prevSlideData && (
+            <span className="text-[10px] text-[var(--muted)] max-w-20 text-center truncate opacity-0 group-hover:opacity-100 transition-opacity">
+              {prevSlideData.title}
+            </span>
+          )}
         </Link>
       )}
 
-      {nextSlide && (
+      {nextSlideId && (
         <Link
-          href={`/slide/${nextSlide}`}
-          className="nav-arrow fixed right-4 top-1/2 -translate-y-1/2 p-3 rounded-xl
-                     bg-[var(--surface)] border border-[var(--surface-border)]
-                     text-[var(--muted)] shadow-[var(--shadow-md)]
-                     hover:text-[var(--foreground)] hover:border-[var(--accent)]
-                     hover:shadow-[var(--shadow-lg)] hover:scale-105
-                     active:scale-95
+          href={`/slide/${nextSlideId}`}
+          className="nav-arrow fixed right-4 top-1/2 -translate-y-1/2
+                     flex flex-col items-center gap-1
                      transition-all duration-200 z-40
                      group
                      hidden lg:flex"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+          <div className="p-3 rounded-xl bg-[var(--surface)] border border-[var(--surface-border)]
+                          text-[var(--muted)] shadow-[var(--shadow-md)]
+                          group-hover:text-[var(--foreground)] group-hover:border-[var(--accent)]
+                          group-hover:shadow-[var(--shadow-lg)] group-hover:scale-105
+                          active:scale-95 transition-all duration-200">
+            <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+          {nextSlideData && (
+            <span className="text-[10px] text-[var(--muted)] max-w-20 text-center truncate opacity-0 group-hover:opacity-100 transition-opacity">
+              {nextSlideData.title}
+            </span>
+          )}
         </Link>
       )}
 
       {/* Mobile bottom navigation */}
       <div className="fixed bottom-0 left-0 right-0 z-50 px-4 py-3 bg-[var(--surface)]/95 backdrop-blur-sm border-t border-[var(--surface-border)] lg:hidden">
         <div className="flex items-center justify-between gap-4">
-          {prevSlide ? (
+          {prevSlideId ? (
             <Link
-              href={`/slide/${prevSlide}`}
+              href={`/slide/${prevSlideId}`}
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl
                          bg-[var(--surface-light)] border border-[var(--surface-border)]
                          text-[var(--foreground)] active:scale-95 transition-all"
@@ -173,9 +189,9 @@ export function Navigation({ currentSlide }: NavigationProps) {
             <div className="flex-1" />
           )}
 
-          {nextSlide ? (
+          {nextSlideId ? (
             <Link
-              href={`/slide/${nextSlide}`}
+              href={`/slide/${nextSlideId}`}
               className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl
                          bg-[var(--accent)] text-white active:scale-95 transition-all"
             >
