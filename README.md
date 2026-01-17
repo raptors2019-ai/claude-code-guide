@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Claude Code Slide Deck
+
+An interactive slide deck teaching Claude Code best practices to non-technical users. Built with Next.js and designed with a Claude-inspired aesthetic.
+
+## Features
+
+- 16 slides covering Claude Code workflow and features
+- Keyboard navigation (arrow keys)
+- Light/dark theme toggle
+- Code blocks with one-click copy
+- Progress bar indicator
+- Responsive design
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the slides.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Slide Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Main Slides (1-9)**
+1. Welcome to Claude Code
+2. Getting Started
+3. The North Star Workflow
+4. Writing Your spec.md
+5. Plan Mode & Controls
+6. Session Management
+7. Skills & Integrations
+8. Screenshots & Images
+9. Full Walkthrough
 
-## Learn More
+**Appendix (10-16)**
+10. Keyboard Shortcuts
+11. Commands & References
+12. Prompt Patterns
+13. CLAUDE.md Template
+14. MCP Integrations
+15. Git Workflow
+16. Error Recovery
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js 16](https://nextjs.org/) - React framework
+- [Tailwind CSS 4](https://tailwindcss.com/) - Styling
+- [Shiki](https://shiki.style/) - Syntax highlighting
+- [Lucide React](https://lucide.dev/) - Icons
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Deploy to [Vercel](https://vercel.com):
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+vercel
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Documentation
+
+See [SPEC.md](./SPEC.md) for the full project specification and [CLAUDE.md](./CLAUDE.md) for development guidelines.
