@@ -16,7 +16,7 @@ export function SlideContainer({ slideId, children }: SlideContainerProps) {
       <Navigation currentSlide={slideId} />
 
       {/* Main content - offset for sidebar on large screens */}
-      <main className="flex-1 flex items-center justify-center px-6 sm:px-12 lg:pl-72 lg:pr-12 xl:pr-24 pt-16 lg:pt-8 pb-20">
+      <main className="flex-1 flex items-center justify-center px-6 sm:px-12 lg:pl-72 lg:pr-12 xl:pr-24 pt-20 lg:pt-12 pb-8">
         <div className="max-w-4xl w-full">
           {children}
         </div>

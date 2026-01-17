@@ -1,91 +1,49 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import { totalSlides, slides, mainSlides, appendixSlides } from '@/lib/slides';
-import { ThemeToggle } from './ThemeToggle';
+import { slides, mainSlides, appendixSlides } from '@/lib/slides';
 
 interface ProgressBarProps {
   currentSlide: number;
 }
 
 export function ProgressBar({ currentSlide }: ProgressBarProps) {
-  const currentIndex = slides.findIndex(s => s.id === currentSlide);
-  const currentSlideData = slides[currentIndex];
-  const [hoveredSlide, setHoveredSlide] = useState<number | null>(null);
-
-  const hoveredSlideData = hoveredSlide !== null
-    ? slides.find(s => s.id === hoveredSlide)
-    : null;
-
   return (
-    <div className="fixed bottom-0 left-0 right-0 lg:left-64 bg-[var(--surface)]/95 backdrop-blur-sm border-t border-[var(--surface-border)] px-6 py-3 z-40">
-      <div className="max-w-4xl mx-auto">
-        {/* Title and count */}
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-sm text-[var(--muted)]">
-            {(hoveredSlideData || currentSlideData)?.section === 'appendix' && (
-              <span className="text-[var(--secondary)] font-medium mr-2">Appendix:</span>
-            )}
-            <span className="font-medium text-[var(--foreground-secondary)]">
-              {hoveredSlideData?.title || currentSlideData?.title}
-            </span>
-          </span>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-[var(--muted)] tabular-nums">
-              {currentIndex + 1} / {totalSlides}
-            </span>
-            <div className="lg:hidden">
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
+    <div className="fixed top-0 left-0 right-0 lg:left-64 z-30 px-4 py-2 flex items-center justify-center">
+      {/* Clickable slide dots */}
+      <div className="flex items-center gap-1 bg-[var(--surface)]/80 backdrop-blur-sm rounded-full px-3 py-1.5 border border-[var(--surface-border)]">
+        {/* Main slides */}
+        {mainSlides.map((slide) => (
+          <Link
+            key={slide.id}
+            href={`/slide/${slide.id}`}
+            className={`h-1.5 rounded-full transition-all duration-200 ${
+              slide.id === currentSlide
+                ? 'w-4 bg-[var(--accent)]'
+                : 'w-1.5 bg-[var(--surface-border)] hover:bg-[var(--accent)]/50'
+            }`}
+            aria-label={slide.title}
+            title={slide.title}
+          />
+        ))}
 
-        {/* Clickable slide blocks */}
-        <div className="flex items-center gap-1">
-          {/* Main slides section */}
-          <div className="flex items-center gap-1">
-            {mainSlides.map((slide) => (
-              <Link
-                key={slide.id}
-                href={`/slide/${slide.id}`}
-                onMouseEnter={() => setHoveredSlide(slide.id)}
-                onMouseLeave={() => setHoveredSlide(null)}
-                className={`h-2 rounded-full transition-all duration-200 ${
-                  slide.id === currentSlide
-                    ? 'w-6 bg-[var(--accent)]'
-                    : slide.id < currentSlide
-                    ? 'w-3 bg-[var(--accent)]/50 hover:bg-[var(--accent)]/70'
-                    : 'w-3 bg-[var(--surface-border)] hover:bg-[var(--muted)]'
-                }`}
-                aria-label={slide.title}
-              />
-            ))}
-          </div>
+        {/* Divider */}
+        <div className="w-px h-2 bg-[var(--surface-border)] mx-1.5" />
 
-          {/* Divider between main and appendix */}
-          <div className="w-px h-4 bg-[var(--surface-border)] mx-2" />
-
-          {/* Appendix slides section */}
-          <div className="flex items-center gap-1">
-            {appendixSlides.map((slide) => (
-              <Link
-                key={slide.id}
-                href={`/slide/${slide.id}`}
-                onMouseEnter={() => setHoveredSlide(slide.id)}
-                onMouseLeave={() => setHoveredSlide(null)}
-                className={`h-2 rounded-full transition-all duration-200 ${
-                  slide.id === currentSlide
-                    ? 'w-6 bg-[var(--secondary)]'
-                    : slide.id < currentSlide
-                    ? 'w-3 bg-[var(--secondary)]/50 hover:bg-[var(--secondary)]/70'
-                    : 'w-3 bg-[var(--surface-border)] hover:bg-[var(--muted)]'
-                }`}
-                aria-label={slide.title}
-              />
-            ))}
-          </div>
-        </div>
+        {/* Appendix slides */}
+        {appendixSlides.map((slide) => (
+          <Link
+            key={slide.id}
+            href={`/slide/${slide.id}`}
+            className={`h-1.5 rounded-full transition-all duration-200 ${
+              slide.id === currentSlide
+                ? 'w-4 bg-[var(--secondary)]'
+                : 'w-1.5 bg-[var(--surface-border)] hover:bg-[var(--secondary)]/50'
+            }`}
+            aria-label={slide.title}
+            title={slide.title}
+          />
+        ))}
       </div>
     </div>
   );
