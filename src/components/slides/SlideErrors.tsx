@@ -8,7 +8,8 @@ export function SlideErrors() {
 Let me explain what I actually need...`;
 
   const debugPrompt = `This error is happening: [paste error]
-Investigate the codebase, find the root cause, and fix it.`;
+Investigate the codebase, find the root cause, and fix it.
+Verify the build/tests succeed. Address the root cause - don't suppress the error.`;
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -23,6 +24,40 @@ Investigate the codebase, find the root cause, and fix it.`;
         <p className="text-lg text-[var(--muted)]">
           When things go wrong - and they will
         </p>
+      </div>
+
+      {/* Describe the Symptom - Before/After */}
+      <div className="bg-[var(--surface)] rounded-xl p-5 border border-[var(--surface-light)]">
+        <h3 className="font-semibold mb-4 flex items-center gap-2">
+          <span className="text-lg">🎯</span> Describe the Symptom
+        </h3>
+        <p className="text-sm text-[var(--muted)] mb-4">
+          Vague bug reports lead to vague fixes. Transform them into actionable prompts:
+        </p>
+        <div className="space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,auto,1fr] gap-3 items-start">
+            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+              <div className="text-xs font-medium text-red-500 mb-2">❌ Vague</div>
+              <p className="text-sm">&quot;fix the login bug&quot;</p>
+            </div>
+            <div className="hidden md:flex items-center justify-center text-[var(--muted)]">→</div>
+            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+              <div className="text-xs font-medium text-green-500 mb-2">✅ Specific</div>
+              <p className="text-sm">&quot;users report that login fails after session timeout. check the auth flow in src/auth/, especially token refresh. write a failing test first, then fix it&quot;</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr,auto,1fr] gap-3 items-start">
+            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+              <div className="text-xs font-medium text-red-500 mb-2">❌ Vague</div>
+              <p className="text-sm">&quot;the build is failing&quot;</p>
+            </div>
+            <div className="hidden md:flex items-center justify-center text-[var(--muted)]">→</div>
+            <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+              <div className="text-xs font-medium text-green-500 mb-2">✅ Specific</div>
+              <p className="text-sm">&quot;the build fails with this error: [paste error]. fix it and verify the build succeeds. address the root cause, don&apos;t suppress the error&quot;</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Quick fixes */}

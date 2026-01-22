@@ -17,6 +17,7 @@ import { Slide11ClaudeMd } from '@/components/slides/Slide11ClaudeMd';
 import { Slide12MCP } from '@/components/slides/Slide12MCP';
 import { SlideGit } from '@/components/slides/SlideGit';
 import { SlideErrors } from '@/components/slides/SlideErrors';
+import { SlideVerification } from '@/components/slides/SlideVerification';
 
 const slideComponents: Record<number, React.ComponentType> = {
   1: Slide1Welcome,
@@ -33,6 +34,7 @@ const slideComponents: Record<number, React.ComponentType> = {
   12: Slide12MCP,
   13: SlideGit,
   14: SlideErrors,
+  15: SlideVerification,
 };
 
 export function generateStaticParams() {

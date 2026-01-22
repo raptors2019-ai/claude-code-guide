@@ -12,3 +12,4 @@ export { Slide11ClaudeMd } from './Slide11ClaudeMd';
 export { Slide12MCP } from './Slide12MCP';
 export { SlideGit } from './SlideGit';
 export { SlideErrors } from './SlideErrors';
+export { SlideVerification } from './SlideVerification';

@@ -22,6 +22,7 @@ export const slides: SlideMetadata[] = [
   { id: 12, title: 'MCP Integrations', section: 'appendix', description: 'Connect to external tools' },
   { id: 13, title: 'Git Workflow', section: 'appendix', description: 'Branches, commits, and PRs' },
   { id: 14, title: 'Error Recovery', section: 'appendix', description: 'When things go wrong' },
+  { id: 15, title: 'Verification', section: 'appendix', description: 'Give Claude a way to self-check' },
 ];
 
 export const totalSlides = slides.length;
