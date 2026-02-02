@@ -72,11 +72,39 @@ export function CoreSlideContainer({ slideId, children }: CoreSlideContainerProp
             ))}
           </div>
 
-          {/* Right: Slide number + theme */}
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-[var(--muted)] tabular-nums">
-              {slideId} / {coreSlides.length}
-            </span>
+          {/* Right: Navigation arrows + Slide number + theme */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
+              {prevSlideId ? (
+                <Link
+                  href={`/core/${prevSlideId}`}
+                  className="p-1.5 rounded-lg text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-light)] transition-colors"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Link>
+              ) : (
+                <span className="p-1.5 text-[var(--surface-border)]">
+                  <ChevronLeft className="w-4 h-4" />
+                </span>
+              )}
+              <span className="text-sm text-[var(--muted)] tabular-nums min-w-[3ch] text-center">
+                {slideId} / {coreSlides.length}
+              </span>
+              {nextSlideId ? (
+                <Link
+                  href={`/core/${nextSlideId}`}
+                  className="p-1.5 rounded-lg text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-light)] transition-colors"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Link>
+              ) : (
+                <span className="p-1.5 text-[var(--surface-border)]">
+                  <ChevronRight className="w-4 h-4" />
+                </span>
+              )}
+            </div>
             <ThemeToggle />
           </div>
         </div>
