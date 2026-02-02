@@ -5,6 +5,13 @@ export interface SlideMetadata {
   description?: string;
 }
 
+export interface CoreSlideMetadata {
+  id: number;
+  title: string;
+  description?: string;
+  duration?: string; // e.g., "~1 min"
+}
+
 export const slides: SlideMetadata[] = [
   // Main slides
   { id: 1, title: 'Welcome to Claude Code', section: 'main', description: 'What is Claude Code and why use it' },
@@ -47,4 +54,35 @@ export function getPrevSlide(currentId: number): number | null {
   // Loop to last slide from first
   if (currentIndex === 0) return slides[slides.length - 1].id;
   return slides[currentIndex - 1].id;
+}
+
+// Core Workflow slides (for advanced meetup - condensed 5-slide version)
+export const coreSlides: CoreSlideMetadata[] = [
+  { id: 1, title: 'Full Workflow', description: 'Spec → Plan → Execute in 4 steps', duration: '~1 min' },
+  { id: 2, title: 'CLAUDE.md + Auto-Learning', description: 'Persistent context that compounds', duration: '~1 min' },
+  { id: 3, title: 'Verification with MCPs', description: 'Let Claude check its own work', duration: '~1 min' },
+  { id: 4, title: 'Skills & Plugins', description: 'Stop typing the same prompts', duration: '~1 min' },
+  { id: 5, title: 'Constantly Learning', description: 'Resources and community', duration: '~30 sec' },
+];
+
+export const totalCoreSlides = coreSlides.length;
+
+export function getCoreSlide(id: number): CoreSlideMetadata | undefined {
+  return coreSlides.find(s => s.id === id);
+}
+
+export function getNextCoreSlide(currentId: number): number | null {
+  const currentIndex = coreSlides.findIndex(s => s.id === currentId);
+  if (currentIndex === -1) return null;
+  // Loop back to first slide at the end
+  if (currentIndex === coreSlides.length - 1) return coreSlides[0].id;
+  return coreSlides[currentIndex + 1].id;
+}
+
+export function getPrevCoreSlide(currentId: number): number | null {
+  const currentIndex = coreSlides.findIndex(s => s.id === currentId);
+  if (currentIndex === -1) return null;
+  // Loop to last slide from first
+  if (currentIndex === 0) return coreSlides[coreSlides.length - 1].id;
+  return coreSlides[currentIndex - 1].id;
 }

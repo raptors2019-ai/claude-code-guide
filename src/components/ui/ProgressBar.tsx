@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Layers } from 'lucide-react';
 import { mainSlides, appendixSlides } from '@/lib/slides';
 import { ThemeToggle } from './ThemeToggle';
 
@@ -50,8 +51,18 @@ export function ProgressBar({ currentSlide }: ProgressBarProps) {
         ))}
       </div>
 
-      {/* Theme toggle */}
-      <ThemeToggle />
+      {/* Core slides link + Theme toggle */}
+      <div className="flex items-center gap-2">
+        <Link
+          href="/core/1"
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-[var(--muted)] hover:text-[var(--foreground)] bg-[var(--surface)] border border-[var(--surface-border)] transition-colors"
+          title="View Core Workflow (condensed 5-slide version)"
+        >
+          <Layers className="w-3.5 h-3.5" />
+          Core
+        </Link>
+        <ThemeToggle />
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ChevronDown, Layers, Grid3X3 } from 'lucide-react';
 import { getNextSlide, getPrevSlide, getSlide, mainSlides, appendixSlides } from '@/lib/slides';
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
@@ -27,17 +27,32 @@ export function Navigation({ currentSlide }: NavigationProps) {
     <>
       {/* Left Sidebar */}
       <aside className="fixed left-0 top-0 bottom-0 w-64 bg-[var(--surface)]/95 backdrop-blur-sm border-r border-[var(--surface-border)] z-50 overflow-y-auto hidden lg:block">
-        {/* Logo */}
+        {/* Logo and deck switcher */}
         <div className="p-4 border-b border-[var(--surface-border)]">
           <Link
             href="/slide/1"
-            className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+            className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors mb-3"
           >
             <span className="w-8 h-8 rounded-lg bg-[var(--accent)] flex items-center justify-center">
               <span className="text-white font-bold text-sm">CC</span>
             </span>
             <span className="font-semibold text-sm">Claude Code Guide</span>
           </Link>
+
+          {/* Deck switcher */}
+          <div className="flex items-center gap-1 bg-[var(--surface-light)] rounded-lg p-1">
+            <span className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium bg-[var(--accent)] text-white">
+              <Grid3X3 className="w-3.5 h-3.5" />
+              Full Deck
+            </span>
+            <Link
+              href="/core/1"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+            >
+              <Layers className="w-3.5 h-3.5" />
+              Core
+            </Link>
+          </div>
         </div>
 
         {/* Main Slides - Always expanded */}
@@ -105,14 +120,23 @@ export function Navigation({ currentSlide }: NavigationProps) {
       {/* Mobile header - shown only on smaller screens */}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 py-2 bg-[var(--surface)]/95 backdrop-blur-sm border-b border-[var(--surface-border)] lg:hidden">
         <div className="flex items-center justify-between">
-          <Link
-            href="/slide/1"
-            className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
-          >
-            <span className="w-7 h-7 rounded-lg bg-[var(--accent)] flex items-center justify-center">
-              <span className="text-white font-bold text-xs">CC</span>
-            </span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/slide/1"
+              className="flex items-center gap-2 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+            >
+              <span className="w-7 h-7 rounded-lg bg-[var(--accent)] flex items-center justify-center">
+                <span className="text-white font-bold text-xs">CC</span>
+              </span>
+            </Link>
+            <Link
+              href="/core/1"
+              className="flex items-center gap-1 px-2 py-1 rounded-md text-xs text-[var(--muted)] hover:text-[var(--foreground)] bg-[var(--surface-light)] transition-colors"
+            >
+              <Layers className="w-3 h-3" />
+              Core
+            </Link>
+          </div>
           <span className="text-sm text-[var(--muted)] tabular-nums">
             {currentIndex} / {totalSlides}
           </span>
