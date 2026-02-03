@@ -1,142 +1,97 @@
 'use client';
 
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, BookOpen, Twitter, Users, Youtube, ExternalLink } from 'lucide-react';
 
 export function CoreSlide5Takeaways() {
-  const myPath = [
-    'JavaScript',
-    'Tailwind & TS',
-    'AI Tools',
-    'Product Owner',
+  const resources = [
+    {
+      icon: BookOpen,
+      title: 'Official Docs',
+      description: 'Best practices & reference',
+      url: 'https://www.anthropic.com/engineering/claude-code-best-practices',
+      color: 'var(--accent)',
+    },
+    {
+      icon: Twitter,
+      title: 'Twitter/X',
+      description: '@bcherny, @trq212, @alexalbert__',
+      url: 'https://twitter.com/bcherny',
+      color: 'var(--secondary)',
+    },
+    {
+      icon: Youtube,
+      title: 'YouTube',
+      description: 'Theo, Primagen, Fireship, Rasmic',
+      url: 'https://youtube.com',
+      color: '#ff0000',
+    },
+    {
+      icon: Users,
+      title: 'r/ClaudeAI',
+      description: 'Community tips & workflows',
+      url: 'https://reddit.com/r/ClaudeAI',
+      color: 'var(--success)',
+    },
   ];
 
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Title */}
       <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/30 text-[var(--accent)] text-xs font-medium">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/30 text-[var(--accent)] text-sm font-medium">
           Core Workflow
         </div>
         <h1 className="text-4xl font-bold tracking-tight">
-          <span className="text-[var(--accent)]">Constantly</span> Learning
+          <span className="text-[var(--accent)]">Resources</span>
         </h1>
         <p className="text-lg text-[var(--muted)]">
-          Learning from other people online
+          Where to keep learning
         </p>
       </div>
 
-      {/* Visual resources grid - like device screenshots */}
+      {/* Resources grid */}
       <div className="grid grid-cols-2 gap-4">
-        {/* Thariq Twitter */}
-        <a
-          href="https://twitter.com/trq212"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-black rounded-2xl p-4 border-4 border-[var(--surface-light)] hover:border-[var(--accent)] transition-colors overflow-hidden"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-2xl">
-              👨‍💻
-            </div>
-            <div>
-              <div className="flex items-center gap-1">
-                <span className="text-white font-bold">Thariq</span>
-                <span className="text-blue-400">✓</span>
+        {resources.map((resource) => (
+          <a
+            key={resource.title}
+            href={resource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)] hover:border-[var(--accent)]/50 transition-colors"
+          >
+            <div className="flex items-start gap-3">
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: `color-mix(in srgb, ${resource.color} 20%, transparent)` }}
+              >
+                <resource.icon className="w-5 h-5" style={{ color: resource.color }} />
               </div>
-              <span className="text-gray-500 text-sm">@trq212</span>
-            </div>
-          </div>
-          <p className="text-gray-400 text-sm mt-2">
-            Claude Code <span className="text-blue-400">@anthropic</span>
-          </p>
-        </a>
-
-        {/* Reddit */}
-        <a
-          href="https://reddit.com/r/ClaudeAI"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-[#1a1a1b] rounded-2xl p-4 border-4 border-[var(--surface-light)] hover:border-[var(--accent)] transition-colors overflow-hidden"
-        >
-          <div className="bg-gradient-to-r from-orange-400 to-orange-600 rounded-lg p-3 mb-2">
-            <div className="flex items-center gap-2">
-              <span className="text-white font-bold text-lg">r/ClaudeAI</span>
-              <span className="text-white text-xl">📊</span>
-            </div>
-          </div>
-          <div className="flex gap-1">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-1 flex-1 bg-gray-700 rounded" />
-            ))}
-          </div>
-        </a>
-
-        {/* Boris Twitter */}
-        <a
-          href="https://twitter.com/bcherny"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-black rounded-2xl p-4 border-4 border-[var(--surface-light)] hover:border-[var(--accent)] transition-colors overflow-hidden"
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-2xl">
-              👨‍💻
-            </div>
-            <div>
-              <div className="flex items-center gap-1">
-                <span className="text-white font-bold">Boris Cherny</span>
-                <span className="text-blue-400">✓</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-semibold text-lg">{resource.title}</h3>
+                  <ExternalLink className="w-4 h-4 text-[var(--muted)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <p className="text-base text-[var(--muted)]">{resource.description}</p>
               </div>
-              <span className="text-gray-500 text-sm">@bcherny</span>
             </div>
-          </div>
-          <p className="text-gray-400 text-sm mt-2">
-            Claude Code <span className="text-blue-400">@anthropic</span>
-          </p>
-        </a>
-
-        {/* YouTube */}
-        <a
-          href="https://youtube.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-white rounded-2xl p-4 border-4 border-[var(--surface-light)] hover:border-[var(--accent)] transition-colors overflow-hidden flex items-center justify-center"
-        >
-          <div className="w-20 h-14 bg-red-600 rounded-xl flex items-center justify-center">
-            <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-white border-b-8 border-b-transparent ml-1"
-              style={{ borderLeftWidth: '16px' }}
-            />
-          </div>
-        </a>
+          </a>
+        ))}
       </div>
 
-      {/* My path - subtle */}
-      <div className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)]">
-        <p className="text-xs text-[var(--muted)] mb-2">My path (2 years):</p>
-        <div className="flex flex-wrap items-center gap-2 text-xs">
-          {myPath.map((step, i) => (
-            <span key={i} className="flex items-center gap-2">
-              <span className="px-2 py-1 rounded bg-[var(--accent)]/10 text-[var(--accent)]">{step}</span>
-              {i < myPath.length - 1 && <span className="text-[var(--muted)]">→</span>}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Main message */}
-      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/30 rounded-xl p-4 text-center">
-        <p className="text-sm font-medium">
-          Excited to learn from everybody here too.
+      {/* Key takeaway */}
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/30 rounded-xl p-5">
+        <p className="text-lg text-center">
+          <strong>The tools are evolving fast.</strong> Follow the people building them.
         </p>
       </div>
 
-      {/* Q&A */}
-      <div className="text-center">
-        <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-[var(--accent)]/10 border border-[var(--accent)]/30">
-          <MessageCircle className="w-8 h-8 text-[var(--accent)]" />
-          <div className="text-left">
-            <h2 className="text-2xl font-bold">Questions?</h2>
-            <p className="text-sm text-[var(--muted)]">Let&apos;s chat!</p>
+      {/* Questions */}
+      <div className="flex items-center justify-center pt-2">
+        <div className="flex items-center gap-4 px-8 py-5 rounded-2xl bg-[var(--surface)] border border-[var(--surface-light)]">
+          <MessageCircle className="w-12 h-12 text-[var(--accent)]" />
+          <div>
+            <h2 className="text-3xl font-bold">Questions?</h2>
+            <p className="text-lg text-[var(--muted)]">Let&apos;s discuss!</p>
           </div>
         </div>
       </div>

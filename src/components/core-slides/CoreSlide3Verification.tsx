@@ -1,7 +1,7 @@
 'use client';
 
 import { Gotcha } from '../ui';
-import { CheckCircle2, Database, FileText, Camera, Server } from 'lucide-react';
+import { CheckCircle2, Database, FileText, Camera, Server, ExternalLink } from 'lucide-react';
 
 export function CoreSlide3Verification() {
   const mcpExamples = [
@@ -35,7 +35,7 @@ export function CoreSlide3Verification() {
     <div className="space-y-5 animate-fade-in">
       {/* Title */}
       <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/30 text-[var(--accent)] text-xs font-medium">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/30 text-[var(--accent)] text-sm font-medium">
           Core Workflow
         </div>
         <h1 className="text-4xl font-bold tracking-tight">
@@ -47,34 +47,42 @@ export function CoreSlide3Verification() {
       </div>
 
       {/* Key insight */}
-      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/30 rounded-xl p-4 flex items-start gap-3">
-        <CheckCircle2 className="w-6 h-6 text-[var(--accent)] flex-shrink-0 mt-0.5" />
+      <div className="bg-[var(--accent)]/10 border border-[var(--accent)]/30 rounded-xl p-5 flex items-start gap-4">
+        <CheckCircle2 className="w-8 h-8 text-[var(--accent)] flex-shrink-0 mt-0.5" />
         <div>
-          <blockquote className="text-sm font-medium">
+          <blockquote className="text-lg font-medium">
             &ldquo;Give Claude a way to verify its work. This is the single highest-leverage thing you can do.&rdquo;
           </blockquote>
-          <p className="text-xs text-[var(--muted)] mt-1">— Official Claude Code Best Practices</p>
+          <a
+            href="https://www.anthropic.com/engineering/claude-code-best-practices"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-base text-[var(--accent)] hover:underline mt-2"
+          >
+            Official Claude Code Best Practices
+            <ExternalLink className="w-4 h-4" />
+          </a>
         </div>
       </div>
 
       {/* Personal note */}
       <div className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)]">
-        <p className="text-sm text-[var(--muted)]">
+        <p className="text-base text-[var(--muted)]">
           I don&apos;t have deep database experience, so I rely on MCPs to verify things are working correctly.
           Claude can query my database, check logs, take screenshots — things I&apos;d otherwise have to do manually.
         </p>
       </div>
 
       {/* MCP examples */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {mcpExamples.map((mcp) => (
           <div key={mcp.name} className="bg-[var(--surface)] rounded-xl p-4 border border-[var(--surface-light)]">
             <div className="flex items-center gap-2 mb-2">
-              <mcp.icon className="w-5 h-5 text-[var(--accent)]" />
-              <h3 className="font-semibold text-sm">{mcp.name}</h3>
+              <mcp.icon className="w-7 h-7 text-[var(--accent)]" />
+              <h3 className="font-semibold text-lg">{mcp.name}</h3>
             </div>
-            <p className="text-xs text-[var(--muted)] mb-2">{mcp.description}</p>
-            <p className="text-xs font-mono text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-1 rounded">
+            <p className="text-base text-[var(--muted)] mb-2">{mcp.description}</p>
+            <p className="text-sm font-mono text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-1.5 rounded">
               {mcp.example}
             </p>
           </div>
