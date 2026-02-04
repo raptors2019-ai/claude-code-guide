@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageCircle, BookOpen, Twitter, Users, Youtube, ExternalLink } from 'lucide-react';
+import { MessageCircle, BookOpen, Twitter, Users, Youtube, Mic, Linkedin, ExternalLink } from 'lucide-react';
 
 export function CoreSlide5Takeaways() {
   const resources = [
@@ -32,6 +32,13 @@ export function CoreSlide5Takeaways() {
       url: 'https://reddit.com/r/ClaudeAI',
       color: 'var(--success)',
     },
+    {
+      icon: Mic,
+      title: 'Wispr Flow',
+      description: 'Voice-to-text — talk to code faster',
+      url: 'https://www.wispr.com/flow',
+      color: '#7c3aed',
+    },
   ];
 
   return (
@@ -42,7 +49,7 @@ export function CoreSlide5Takeaways() {
           Core Workflow
         </div>
         <h1 className="text-4xl font-bold tracking-tight">
-          <span className="text-[var(--accent)]">Resources</span>
+          <span className="text-[var(--accent)]">Resources + Tools</span>
         </h1>
         <p className="text-lg text-[var(--muted)]">
           Where to keep learning
@@ -85,15 +92,25 @@ export function CoreSlide5Takeaways() {
         </p>
       </div>
 
-      {/* Questions */}
+      {/* Audience prompt */}
       <div className="flex items-center justify-center pt-2">
         <div className="flex items-center gap-4 px-8 py-5 rounded-2xl bg-[var(--surface)] border border-[var(--surface-light)]">
           <MessageCircle className="w-12 h-12 text-[var(--accent)]" />
           <div>
-            <h2 className="text-3xl font-bold">Questions?</h2>
-            <p className="text-lg text-[var(--muted)]">Let&apos;s discuss!</p>
+            <h2 className="text-2xl font-bold">Who do you follow in this space?</h2>
+            <p className="text-base text-[var(--muted)]">Share your favorites!</p>
           </div>
         </div>
+      </div>
+
+      {/* Presenter */}
+      <div className="flex items-center justify-center gap-3 pt-1 text-[var(--muted)]">
+        <span className="text-base font-medium text-[var(--foreground)]">Josh Si</span>
+        <span className="text-sm">·</span>
+        <span className="inline-flex items-center gap-1.5 text-sm">
+          <Linkedin className="w-4 h-4" />
+          @JoshSingarayer
+        </span>
       </div>
     </div>
   );
