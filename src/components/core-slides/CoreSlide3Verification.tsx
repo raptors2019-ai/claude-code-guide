@@ -1,39 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Gotcha } from '../ui';
 import { CheckCircle2, Database, FileText, Camera, Server, ExternalLink, BatteryMedium } from 'lucide-react';
 
-function ToggleTip() {
-  const [on, setOn] = useState(false);
+export function CoreSlide3Verification() {
+  const [mcpOn, setMcpOn] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => setOn((v) => !v), 1800);
+    const interval = setInterval(() => setMcpOn((v) => !v), 3500);
     return () => clearInterval(interval);
   }, []);
-
-  return (
-    <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--surface-light)]">
-      {/* iOS-style toggle */}
-      <button
-        onClick={() => setOn((v) => !v)}
-        className="relative w-12 h-7 rounded-full flex-shrink-0 transition-colors duration-300"
-        style={{ backgroundColor: on ? '#34c759' : 'rgba(120,120,128,0.32)' }}
-      >
-        <span
-          className="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md transition-transform duration-300"
-          style={{ transform: on ? 'translateX(20px)' : 'translateX(0)' }}
-        />
-      </button>
-      <p className="text-base">
-        <strong>Only enable MCPs when you need them.</strong>
-        <span className="text-[var(--muted)]"> Definitions load even if you never call them.</span>
-      </p>
-    </div>
-  );
-}
-
-export function CoreSlide3Verification() {
   const mcpExamples = [
     {
       icon: Database,
@@ -129,57 +105,113 @@ export function CoreSlide3Verification() {
           <span className="text-sm text-[var(--muted)]">200k tokens per session</span>
         </div>
 
-        {/* Battery bar */}
+        {/* Battery bar — MCP segments are adjacent, animate with toggle */}
         <div className="relative w-full h-9 rounded-lg overflow-hidden border-2 border-[var(--surface-light)] bg-[var(--surface)]">
           <div className="flex h-full">
-            <div style={{ width: '3.5%' }} className="bg-[var(--muted)]/30 border-r border-[var(--background)]" />
-            <div style={{ width: '3%' }} className="bg-[var(--secondary)]/30 border-r border-[var(--background)]" />
-            <div style={{ width: '7.5%' }} className="bg-amber-500 border-r border-[var(--background)]" />
-            <div style={{ width: '15%' }} className="bg-[var(--accent)]/30 border-r border-[var(--background)]" />
-            <div style={{ width: '25%' }} className="bg-[var(--accent)]/15 border-r border-[var(--background)]" />
-            <div style={{ width: '15%' }} className="bg-violet-500 border-r border-[var(--background)]" />
-            <div style={{ width: '31%' }} className="bg-[var(--success)]/15" />
+            {/* System + CLAUDE.md */}
+            <div
+              className="border-r border-[var(--background)] transition-all duration-700"
+              style={{ width: '3.5%', backgroundColor: 'rgba(140,140,160,0.35)' }}
+            />
+            {/* Skills */}
+            <div
+              className="border-r border-[var(--background)] transition-all duration-700"
+              style={{ width: '3%', backgroundColor: 'rgba(100,140,200,0.4)' }}
+            />
+            {/* Messages */}
+            <div
+              className="border-r border-[var(--background)] transition-all duration-700"
+              style={{ width: '15%', backgroundColor: 'var(--accent)', opacity: 0.35 }}
+            />
+            {/* Code & Files */}
+            <div
+              className="border-r border-[var(--background)] transition-all duration-700"
+              style={{ width: '25%', backgroundColor: 'var(--accent)', opacity: 0.2 }}
+            />
+            {/* MCP Definitions — adjacent */}
+            <div
+              className="border-r border-[var(--background)] transition-all duration-700 overflow-hidden"
+              style={{ width: mcpOn ? '7.5%' : '0%', backgroundColor: '#f59e0b' }}
+            />
+            {/* MCP Results — adjacent */}
+            <div
+              className="border-r border-[var(--background)] transition-all duration-700 overflow-hidden"
+              style={{ width: mcpOn ? '15%' : '0%', backgroundColor: '#8b5cf6' }}
+            />
+            {/* Available */}
+            <div
+              className="transition-all duration-700"
+              style={{ width: mcpOn ? '31%' : '53.5%', backgroundColor: '#22c55e', opacity: mcpOn ? 0.3 : 0.5 }}
+            />
           </div>
         </div>
 
-        {/* MCP callout - side by side */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/15 border border-amber-500/40">
-            <span className="w-4 h-4 rounded-sm bg-amber-500 flex-shrink-0" />
+        {/* MCP callout cards — fade with toggle */}
+        <div
+          className="grid grid-cols-2 gap-3 transition-all duration-500"
+          style={{ opacity: mcpOn ? 1 : 0.3, transform: mcpOn ? 'scale(1)' : 'scale(0.97)' }}
+        >
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-500/15 border border-amber-500/50">
+            <span className="w-4 h-4 rounded-sm flex-shrink-0" style={{ backgroundColor: '#f59e0b' }} />
             <span className="font-bold text-amber-400">MCP Definitions <span className="font-normal opacity-70">~15k</span></span>
           </div>
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-violet-500/15 border border-violet-500/40">
-            <span className="w-4 h-4 rounded-sm bg-violet-500 flex-shrink-0" />
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-violet-500/15 border border-violet-500/50">
+            <span className="w-4 h-4 rounded-sm flex-shrink-0" style={{ backgroundColor: '#8b5cf6' }} />
             <span className="font-bold text-violet-400">MCP Results <span className="font-normal opacity-70">~30k</span></span>
           </div>
         </div>
 
-        {/* Other legend items */}
+        {/* Other legend + available (highlights when MCPs off) */}
         <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-[var(--muted)]">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[var(--muted)]/30 flex-shrink-0" />
+            <span className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: 'rgba(140,140,160,0.35)' }} />
             System + CLAUDE.md ~7k
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[var(--secondary)]/30 flex-shrink-0" />
+            <span className="w-3 h-3 rounded-sm flex-shrink-0" style={{ backgroundColor: 'rgba(100,140,200,0.4)' }} />
             Skills ~6k
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[var(--accent)]/30 flex-shrink-0" />
+            <span className="w-3 h-3 rounded-sm bg-[var(--accent)]/35 flex-shrink-0" />
             Messages ~30k
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[var(--accent)]/15 flex-shrink-0" />
+            <span className="w-3 h-3 rounded-sm bg-[var(--accent)]/20 flex-shrink-0" />
             Code & Files ~50k
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-sm bg-[var(--success)]/15 flex-shrink-0" />
-            <span className="text-[var(--success)]">Available ~62k</span>
+          <div className="flex items-center gap-1.5 transition-all duration-500">
+            <span
+              className="w-3 h-3 rounded-sm flex-shrink-0 transition-all duration-700"
+              style={{ backgroundColor: mcpOn ? 'rgba(34,197,94,0.3)' : 'rgba(34,197,94,0.6)' }}
+            />
+            <span
+              className="font-medium transition-colors duration-500"
+              style={{ color: mcpOn ? 'var(--muted)' : '#22c55e' }}
+            >
+              Available {mcpOn ? '~62k' : '~107k'}
+            </span>
           </div>
         </div>
 
-        {/* Toggle tip */}
-        <ToggleTip />
+        {/* Toggle */}
+        <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--surface-light)]">
+          <button
+            onClick={() => setMcpOn((v) => !v)}
+            className="relative w-12 h-7 rounded-full flex-shrink-0 transition-colors duration-500"
+            style={{ backgroundColor: mcpOn ? '#34c759' : 'rgba(120,120,128,0.32)' }}
+          >
+            <span
+              className="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow-md transition-transform duration-500"
+              style={{ transform: mcpOn ? 'translateX(20px)' : 'translateX(0)' }}
+            />
+          </button>
+          <p className="text-base">
+            <strong>{mcpOn ? 'MCPs enabled' : 'MCPs disabled'}</strong>
+            <span className="text-[var(--muted)]">
+              {mcpOn ? ' — definitions loaded, using ~45k tokens' : ' — context freed up for longer sessions'}
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );
